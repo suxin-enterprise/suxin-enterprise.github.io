@@ -269,6 +269,7 @@ a:hover { color: oklch(0.82 0.13 255); }
   display: flex; align-items: center; justify-content: center; z-index: 100;
   padding: 32px; animation: fadeInUp 0.25s ease both;
 }
+.overlay[hidden] { display: none; }
 .modal {
   background: white; border-radius: 20px; max-width: 640px; width: 100%;
   max-height: 86vh; overflow-y: auto; position: relative; color: oklch(0.18 0.01 90);
