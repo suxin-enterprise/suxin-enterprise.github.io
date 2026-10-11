@@ -1,0 +1,100 @@
+/* Product pages: pinned split screen. The copy on the left swaps step by step while
+   the product's own animated scene on the right plays along with the scroll. */
+
+.site .pstory { position: relative; }
+html.js .site .pstory { height: calc(var(--n) * 90svh + 10svh); }
+.site .pstory-stage { position: relative; overflow: hidden; padding-block: 3rem; }
+html.js .site .pstory-stage { position: sticky; top: 0; height: 100vh; height: 100svh; padding-block: 66px 0; display: flex; align-items: center; }
+.site .pstory-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); align-items: center; gap: clamp(1.5rem, 4vw, 3.5rem); }
+
+/* Copy: panels stacked in one spot, the active one shown */
+.site .pstory-panels { position: relative; display: grid; gap: 2.5rem; }
+html.js .site .pstory-panels { display: block; min-height: 470px; }
+html.js .site .pstory-panel {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  opacity: 0; visibility: hidden; transform: translateY(36px); filter: blur(6px);
+  transition: opacity .55s var(--ease), transform .7s var(--ease-pop), filter .55s var(--ease), visibility 0s .7s;
+}
+html.js .site .pstory-panel.is-past { transform: translateY(-36px); }
+html.js .site .pstory-panel.is-on { opacity: 1; visibility: visible; transform: none; filter: none; transition-delay: .08s, .08s, .08s, 0s; }
+.site .pstory-panel .h1 { margin: 0; }
+.site .pstory-panel .lead { margin-top: 1rem; }
+.site .pstory-panel .h2 { margin-top: .9rem; max-width: 18ch; }
+.site .pstory-panel .story-list li { font-size: var(--fs-body); }
+.site .pstory-panel .story-num { font-size: clamp(3rem, 6vw, 4.6rem); }
+.site .pstory-panel .story-who { font-size: clamp(1.2rem, 2vw, 1.55rem); max-width: 26ch; }
+
+/* Progress segments, story-style */
+.site .pstory-segs { display: none; }
+html.js .site .pstory-segs { display: flex; gap: .4rem; margin-top: 1.5rem; max-width: 420px; }
+.site .pstory-segs button { flex: 1; height: 22px; display: flex; align-items: center; cursor: pointer; }
+.site .pstory-segs button::before { content: ""; display: block; width: 100%; height: 4px; border-radius: 4px; background: var(--surface-2); }
+.site .pstory-segs button { position: relative; }
+.site .pstory-segs i { position: absolute; left: 0; top: 9px; height: 4px; width: 100%; border-radius: 4px; background: var(--grad); transform-origin: 0 50%; transform: scaleX(0); }
+
+/* Scene frame */
+.site .pstory-scene {
+  position: relative; border-radius: var(--r-xl); border: 1px solid var(--line); background: var(--surface);
+  box-shadow: var(--shadow); overflow: hidden; aspect-ratio: 600 / 480; max-height: calc(100svh - 104px); width: 100%; margin-inline: auto;
+}
+.site .pstory-scene::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.site .ps-svg { position: relative; display: block; width: 100%; height: 100%; }
+
+@media (width <= 900px) {
+  html.js .site .pstory { height: calc(var(--n) * 100svh); }
+  html.js .site .pstory-stage { padding-top: 70px; align-items: flex-start; }
+  .site .pstory-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .site .pstory-scene { order: -1; max-height: 40svh; aspect-ratio: 600 / 440; }
+  html.js .site .pstory-panels { min-height: calc(100svh - 40svh - 150px); }
+  html.js .site .pstory-panel { justify-content: flex-start; }
+  .site .pstory-body, .site .pstory-panel .crumbs { display: none; }
+  .site .pstory-panel .story-num { font-size: 2rem; }
+  .site .pstory-panel .h2 { font-size: 1.45rem; margin-top: .6rem; }
+  .site .pstory-panel .story-list { gap: .3rem; margin-top: .6rem; }
+  .site .pstory-panel .story-list li { font-size: var(--fs-sm); }
+  html.js .site .pstory-segs { margin-top: .75rem; max-width: none; }
+}
+
+/* ---------- scene palette (follows the colour theme) ---------- */
+.ps-svg text { font-family: var(--f-mono); }
+.ps-svg .c-panel { fill: var(--surface-solid); stroke: var(--line-strong); stroke-width: 1.2; }
+.ps-svg .c-dim { fill: var(--surface-2); }
+.ps-svg .c-line { fill: none; stroke: var(--line-strong); stroke-width: 1.4; }
+.ps-svg .c-ink { fill: var(--tx); }
+.ps-svg .c-mut { fill: var(--tx-3); }
+.ps-svg .c-mut2 { fill: var(--tx-3); opacity: .45; }
+.ps-svg .c-acc { fill: #10b981; }
+.ps-svg .c-acc2 { fill: #5eead4; }
+.ps-svg .c-teal { fill: #0d9488; }
+.ps-svg .c-warn { fill: #f59e0b; }
+.ps-svg .c-red { fill: #f87171; }
+.ps-svg .c-kraft { fill: #e2bb84; }
+.ps-svg .c-kraft2 { fill: #c1925a; }
+.ps-svg .c-tape { fill: #9a6a34; opacity: .5; }
+.ps-svg .c-steel { fill: #9fb3bf; }
+.ps-svg .c-steel2 { fill: #6d8492; }
+.ps-svg .c-dark { fill: #0b1b2b; }
+.ps-svg .c-screen { fill: #06121c; }
+.ps-svg .c-paper { fill: #fbfdfd; }
+.ps-svg .c-paperline { fill: #d5dfe3; }
+.ps-svg .c-white { fill: #fff; }
+.ps-svg .c-shadow { fill: #000; opacity: .22; }
+.ps-svg .s-acc { fill: none; stroke: #10b981; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.ps-svg .s-acc2 { fill: none; stroke: #5eead4; stroke-width: 2; stroke-linecap: round; }
+.ps-svg .s-dash { fill: none; stroke: var(--line-strong); stroke-width: 2; stroke-dasharray: 5 6; }
+.ps-svg .s-warn { fill: none; stroke: #f59e0b; stroke-width: 2; stroke-dasharray: 6 5; }
+.ps-svg .s-steel { fill: none; stroke: #9fb3bf; stroke-width: 4; stroke-linecap: round; }
+.ps-svg .t-ink { fill: var(--tx); font-weight: 600; }
+.ps-svg .t-mut { fill: var(--tx-3); }
+.ps-svg .t-scr { fill: #e6fff7; font-weight: 600; }
+.ps-svg .t-acc { fill: #10b981; font-weight: 700; }
+.ps-svg .t-dark { fill: #0b1b2b; font-weight: 700; }
+.ps-svg .p1 { fill: #34d399; } .ps-svg .p2 { fill: #f87171; } .ps-svg .p3 { fill: #fbbf24; }
+.ps-svg .p4 { fill: #60a5fa; } .ps-svg .p5 { fill: #c084fc; } .ps-svg .p6 { fill: #e2bb84; }
+:root[data-theme=light] .ps-svg .c-shadow { opacity: .1; }
+:root[data-theme=light] .ps-svg .c-steel { fill: #b6c4cb; }
+.ps-svg .ps-ico { color: var(--tx-3); }

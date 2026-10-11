@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"/>
 <link rel="stylesheet" href="assets/site.css?v=a7d32435"/>
 <link rel="stylesheet" href="assets/suxin.css?v=b6dadbbd"/>
+<link rel="stylesheet" href="assets/home-scroll.css?v=d4cd99e8"/>
+<link rel="stylesheet" href="assets/warehouse.css?v=e04f817f"/>
 <script>
   // Apply the saved colour theme before first paint to avoid a flash.
   try { var t = localStorage.getItem('suxin-theme'); if (t === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}
@@ -28,6 +30,7 @@
 </head>
 <body>
 <div class="site">
+<div class="scroll-prog" aria-hidden="true"></div>
 <a href="#main" class="skip">Skip to content</a>
 
 <header class="nav">
@@ -89,62 +92,105 @@
 <main id="main">
 <div class="page-in" id="top">
 
-<!-- HERO -->
-<section class="hero grid-bg">
-  <span class="glow ora" style="width:520px;height:520px;top:-180px;left:-120px"></span>
-  <span class="glow red" style="width:420px;height:420px;bottom:-200px;right:-80px"></span>
-  <div class="wrap hero-in">
-    <div>
-      <span class="eyebrow">POS · Stock · Warehouse · Accounts</span>
-      <h1 class="display">One Business. <span class="grad-tx">Connected.</span></h1>
-      <p class="lead">SuXin runs your counter, your stock, your warehouse and your books on one account. Ring up a sale at the till: the stock drops in the warehouse, you see it on your phone, and the e-invoice is ready in your accounts.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary btn-lg" href="#start">Start free trial
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-        <a class="btn btn-ghost btn-lg" href="#products">Explore products</a>
-      </div>
-      <div class="chips hero-chips" role="list" aria-label="SuXin apps">
-        <span class="chip" role="listitem"><i class="dot"></i>POS</span>
-        <span class="chip" role="listitem"><i class="dot"></i>Barcode Scan</span>
-        <span class="chip" role="listitem"><i class="dot"></i>WMS</span>
-        <span class="chip" role="listitem"><i class="dot"></i>Every Data</span>
-        <span class="chip" role="listitem"><i class="dot"></i>Books</span>
-      </div>
-      <p class="hero-note">Five apps · one account · web and Android · Chinese, English, Malay · Malaysia &amp; Singapore</p>
-    </div>
-
-    <div class="trail-stage" aria-hidden="true">
-      <svg viewBox="0 0 560 560" role="presentation">
-        <defs>
-          <linearGradient id="trailGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#10B981"></stop><stop offset=".55" stop-color="#14B8A6"></stop><stop offset="1" stop-color="#5EEAD4"></stop></linearGradient>
-          <radialGradient id="nodeG"><stop offset="0" stop-color="#5EEAD4"></stop><stop offset="1" stop-color="#10B981"></stop></radialGradient>
-        </defs>
-        <path class="trail-path" d="M72 154 C 20 250, 40 370, 120 500" stroke-dasharray="3 9"></path>
-        <path id="trailA" class="trail-path" d="M72 154 C 150 150, 212 130, 268 168 C 322 218, 236 268, 214 330 C 190 398, 320 424, 452 468"></path>
-        <path id="trailB" class="trail-path" d="M268 168 C 340 200, 420 214, 470 268" stroke-dasharray="2 8" opacity=".35"></path>
-        <use href="#trailA" class="trail-dash"></use>
-        <use href="#trailA" class="trail-dash b"></use>
-        <use href="#trailA" class="trail-dash c"></use>
-        <circle class="packet" r="4" fill="#5EEAD4"><animateMotion dur="6.2s" repeatCount="indefinite" rotate="auto"><mpath href="#trailA"></mpath></animateMotion></circle>
-        <circle class="packet" r="3.2" fill="#10B981"><animateMotion dur="6.2s" begin="-2.1s" repeatCount="indefinite"><mpath href="#trailA"></mpath></animateMotion></circle>
-        <circle class="packet" r="3.2" fill="#2DD4BF"><animateMotion dur="6.2s" begin="-4.2s" repeatCount="indefinite"><mpath href="#trailA"></mpath></animateMotion></circle>
-        <!-- Supplier -->
-        <g class="node" style="color:#10B981"><circle class="node-ring" cx="72" cy="154" r="17"></circle><circle cx="72" cy="154" r="8" fill="url(#nodeG)"></circle><text class="node-t" x="72" y="124" text-anchor="middle">SUPPLIER</text><text class="node-lab" x="72" y="188" text-anchor="middle">PURCHASE ORDER</text></g>
-        <!-- WMS -->
-        <g class="node" style="color:#2DD4BF"><circle class="node-ring" cx="268" cy="168" r="19"></circle><path d="M268 157l10 5.5v11L268 179l-10-5.5v-11zM258 162.5l10 5.5 10-5.5M268 168v11" fill="none" stroke="#2DD4BF" stroke-width="1.7" stroke-linejoin="round"></path><text class="node-t" x="268" y="132" text-anchor="middle">SUXIN WMS</text><text class="node-lab" x="268" y="206" text-anchor="middle">RECEIVE · STOCK</text></g>
-        <!-- POS -->
-        <g class="node" style="color:#14B8A6"><circle class="node-ring" cx="214" cy="330" r="19"></circle><path d="M203 322h3l3 12h12l3-9h-16M211 339h.1M220 339h.1" fill="none" stroke="#14B8A6" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path><text class="node-t" x="214" y="298" text-anchor="middle">SUXIN POS</text><text class="node-lab" x="214" y="368" text-anchor="middle">COUNTER SALE</text></g>
-        <!-- Books -->
-        <g class="node" style="color:#5EEAD4"><circle class="node-ring" cx="452" cy="468" r="19"></circle><path d="M444 458h12l4 4v15h-16zM448 466h8M448 471h8" fill="none" stroke="#5EEAD4" stroke-width="1.7" stroke-linejoin="round"></path><text class="node-t" x="452" y="436" text-anchor="middle">SUXIN BOOKS</text><text class="node-lab" x="452" y="506" text-anchor="middle">MYINVOIS</text></g>
-        <!-- Every Data -->
-        <g class="node" style="color:#7D929D"><circle class="node-ring" cx="470" cy="268" r="14"></circle><path d="M464 273l4-5 3 3 5-6" fill="none" stroke="#7D929D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><text class="node-lab" x="470" y="242" text-anchor="middle">EVERY DATA</text></g>
-      </svg>
-      <div class="hero-floats">
-        <div class="fpm a"><span class="k">Today's sales</span><span class="v">RM <span data-count="1273.16" data-dec="2">1,273.16</span></span><span class="d">▲ 35 receipts · Every Data</span></div>
-        <div class="fpm b"><span class="k">Stock value (cost)</span><span class="v">RM <span data-count="2129" data-dec="2">2,129.00</span></span><span class="d">SuXin WMS · 2 low stock</span></div>
-        <div class="fpm c"><span class="k">Checkout modes</span><span class="v"><em><span data-count="3">3</span></em> in 1</span><span class="d">F&amp;B · Supermarket · Retail</span></div>
+<!-- STORY: the animated warehouse stays pinned while the steps scroll over it -->
+<section class="story" aria-label="How SuXin works, from the dock to the books">
+  <div class="story-stage">
+    <span class="glow ora" style="width:520px;height:520px;top:-180px;left:-120px"></span>
+    <span class="glow red" style="width:420px;height:420px;bottom:-200px;right:-80px"></span>
+    <div class="story-scene"></div>
+    <nav class="story-rail" aria-label="Story steps">
+      <a href="#top" aria-label="Start">0</a><a href="#flow" aria-label="Receive">1</a><a href="#step-2" aria-label="Store">2</a><a href="#step-3" aria-label="Count">3</a><a href="#step-4" aria-label="Sell">4</a><a href="#step-5" aria-label="See">5</a><a href="#step-6" aria-label="Book">6</a>
+    </nav>
+  </div>
+  <div class="story-steps">
+  <div class="story-step" data-cam="11.5,17,0.92" data-cam-m="17,13,1" data-ring="0">
+    <div class="wrap">
+      <div class="story-hero">
+        <span class="eyebrow">POS · Stock · Warehouse · Accounts</span>
+        <h1 class="display">One Business. <span class="grad-tx">Connected.</span></h1>
+        <p class="lead">SuXin runs your counter, your stock, your warehouse and your books on one account. Ring up a sale at the till: the stock drops in the warehouse, you see it on your phone, and the e-invoice is ready in your accounts.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="#start">Start free trial
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+          <a class="btn btn-ghost btn-lg" href="#products">Explore products</a>
+        </div>
+        <p class="hero-note">Five apps · one account · web and Android · Chinese, English, Malay · Malaysia &amp; Singapore</p>
+        <div class="scroll-hint" aria-hidden="true"><span class="mouse"></span><span>Scroll to walk the warehouse</span></div>
       </div>
     </div>
+  </div>
+  <div class="story-step" id="flow" data-cam="10,21,1.9" data-ring="3.2">
+    <div class="wrap">
+      <article class="story-card">
+        <span class="story-num" aria-hidden="true">01</span>
+        <span class="badge">SuXin WMS · Receiving</span>
+        <h2 class="h3">Stock arrives. Every carton counted in.</h2>
+        <p>The lorry backs into the dock, the purchase order is ticked off line by line, and the landed cost is worked out as the cartons roll down the belt.</p>
+        <div class="story-meta"><i></i><span>PO-261003-0915-MJ · 24 / 24</span></div>
+        <a class="link-arrow" href="products/wms/">SuXin WMS <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+      </article>
+    </div>
+  </div>
+  <div class="story-step" id="step-2" data-cam="15,6,1.65" data-ring="4">
+    <div class="wrap">
+      <article class="story-card">
+        <span class="story-num" aria-hidden="true">02</span>
+        <span class="badge">SuXin WMS · Stock</span>
+        <h2 class="h3">Every shelf, every branch, one stock count.</h2>
+        <p>Put away by shelf and warehouse. Transfers move stock from the central warehouse to the shops, and every move is recorded on both sides.</p>
+        <div class="story-meta"><i></i><span>Central Warehouse → Ipoh Shop</span></div>
+        <a class="link-arrow" href="products/wms/">SuXin WMS <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+      </article>
+    </div>
+  </div>
+  <div class="story-step" id="step-3" data-cam="9.2,7,2.3" data-ring="2.6">
+    <div class="wrap">
+      <article class="story-card">
+        <span class="story-num" aria-hidden="true">03</span>
+        <span class="badge">SuXin Barcode Scan · Stock-take</span>
+        <h2 class="h3">Scan the shelf. The count fixes itself.</h2>
+        <p>Walk the aisle with a phone camera or a barcode scanner. Differences go straight into SuXin WMS, so the number on screen matches the shelf.</p>
+        <div class="story-meta"><i></i><span>2909000000028 · Rice 5kg · 20 → 19</span></div>
+        <a class="link-arrow" href="products/barcode-scan/">SuXin Barcode Scan <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+      </article>
+    </div>
+  </div>
+  <div class="story-step" id="step-4" data-cam="30,21.5,2.1" data-ring="3.2">
+    <div class="wrap">
+      <article class="story-card">
+        <span class="story-num" aria-hidden="true">04</span>
+        <span class="badge">SuXin POS · Counter</span>
+        <h2 class="h3">Sold at the counter. Stock drops at once.</h2>
+        <p>Scan, scan, charge. SST goes on the bill, the receipt prints, and the item leaves that branch's stock the moment it's paid, even offline.</p>
+        <div class="story-meta"><i></i><span>RM 47.43 · 261010-025937-DX</span></div>
+        <a class="link-arrow" href="products/pos/">SuXin POS <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+      </article>
+    </div>
+  </div>
+  <div class="story-step" id="step-5" data-cam="28.2,12.4,2.4" data-ring="2.6">
+    <div class="wrap">
+      <article class="story-card">
+        <span class="story-num" aria-hidden="true">05</span>
+        <span class="badge">SuXin Every Data · Owner's view</span>
+        <h2 class="h3">The owner sees it, from anywhere.</h2>
+        <p>Today's sales, receipts, low stock and purchase orders waiting, live on Every Data. Check it from your phone between suppliers.</p>
+        <div class="story-meta"><i></i><span>RM 1,273.16 · ▲ 35</span></div>
+        <a class="link-arrow" href="products/every-data/">SuXin Every Data <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+      </article>
+    </div>
+  </div>
+  <div class="story-step" id="step-6" data-cam="19,12.8,2.5" data-ring="2.2">
+    <div class="wrap">
+      <article class="story-card">
+        <span class="story-num" aria-hidden="true">06</span>
+        <span class="badge">SuXin Books · Accounts</span>
+        <h2 class="h3">Booked, e-invoiced, done.</h2>
+        <p>Sales post to the accounts by themselves. The MyInvois file is ready, and P&amp;L and SST stay up to date for you or your accountant.</p>
+        <div class="story-meta"><i></i><span>INV-2026-00001 · MyInvois JSON</span></div>
+        <a class="link-arrow" href="products/books/">SuXin Books <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+      </article>
+    </div>
+  </div>
   </div>
 </section>
 
@@ -159,17 +205,18 @@
     </div>
   </div>
 </section>
-<hr class="rule"/>
+<div class="belt" aria-hidden="true"></div>
 
 <!-- PRODUCTS -->
-<section class="sec" id="products">
+<section class="sec hpin" id="products">
+  <div class="hpin-sticky">
   <div class="wrap">
     <div class="sec-head rv">
       <span class="eyebrow">Five apps. One account.</span>
       <h2 class="h2">Open what your plan includes. Add the rest any time.</h2>
       <p class="lead">One sign-in for everything. The till, the stock-take, the warehouse, the owner's dashboard and the accounts all read the same items, the same branches and the same receipts.</p>
     </div>
-    <div class="grid g3">
+    <div class="grid g3 hpin-track">
       <a class="card pcard rv" id="pos" href="products/pos/"><span class="glowline"></span>
         <div class="pcard-top"><span class="pcard-tag">POS</span><span class="badge neutral">Counter</span></div>
         <h3 class="h3">SuXin POS</h3>
@@ -238,11 +285,14 @@
         <div class="pcard-foot"><span class="mono dim">One account for all</span><span class="link-arrow">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
       </a>
     </div>
+    <div class="hpin-bar" aria-hidden="true"><i></i><b class="hpin-cart"></b></div>
+  </div>
   </div>
 </section>
 
 <!-- SCREENS -->
-<section class="sec sec-tight pt-0" id="screens">
+<section class="sec sec-tight pt-0 scr-pin" id="screens">
+  <div class="pin-sticky">
   <div class="wrap">
     <div class="sec-head rv">
       <span class="eyebrow">See it, don't read about it</span>
@@ -385,44 +435,12 @@
     </div>
     <p class="hero-note mt-4">Previews use sample records from SuXin's demo company.</p>
   </div>
-</section>
-
-<!-- FLOW -->
-<section class="sec grid-bg border-t border-(--line)" id="flow">
-  <span class="glow gold" style="width:460px;height:460px;top:10%;left:40%"></span>
-  <div class="wrap">
-    <div class="sec-head center rv">
-      <span class="eyebrow no-rule">How it fits together</span>
-      <h2 class="h2">One sale. Every app knows. Zero re-typing.</h2>
-      <p class="lead">Stock comes in through the warehouse, goes out at the till, shows up on the owner's phone and lands in the accounts. SuXin Barcode Scan keeps the count honest underneath it all.</p>
-    </div>
-    <div class="colony rv d1" aria-hidden="true">
-      <svg viewBox="0 0 1000 300" role="presentation">
-        <defs><linearGradient id="colG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#10B981"></stop><stop offset="1" stop-color="#0D9488"></stop></linearGradient></defs>
-        <path id="colPath" d="M90 118 H910" fill="none" stroke="url(#colG)" stroke-width="2" opacity=".5"></path>
-        <path class="trail-dash" d="M90 118 H910" fill="none"></path>
-        <path class="trail-dash b" d="M90 118 H910" fill="none"></path>
-        <circle class="packet" r="4" fill="#5EEAD4"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#colPath"></mpath></animateMotion></circle>
-        <circle class="packet" r="3" fill="#fff" opacity=".9"><animateMotion dur="7s" begin="-3.4s" repeatCount="indefinite"><mpath href="#colPath"></mpath></animateMotion></circle>
-        <path d="M90 232 H910" fill="none" stroke="#5EEAD4" stroke-width="1.4" stroke-dasharray="4 8" opacity=".45"></path>
-        <text class="node-lab tracking-[0.2em]" x="500" y="264" text-anchor="middle">SUXIN BARCODE SCAN · ONE ITEM LIST · ONE STOCK COUNT · EVERY BRANCH</text>
-        <g class="node" style="color:#10B981"><circle cx="90" cy="118" r="26" fill="none" stroke="#10B981" stroke-width="2"></circle><text class="node-code" x="90" y="124" text-anchor="middle" fill="#10B981" font-size="15">WMS</text><text class="node-t" x="90" y="66" text-anchor="middle">Stock received</text><text class="node-lab" x="90" y="180" text-anchor="middle">WAREHOUSE</text></g>
-        <g class="node" style="color:#2DD4BF"><circle cx="363" cy="118" r="26" fill="none" stroke="#2DD4BF" stroke-width="2"></circle><text class="node-code" x="363" y="124" text-anchor="middle" fill="#2DD4BF" font-size="15">POS</text><text class="node-t" x="363" y="66" text-anchor="middle">Sold at the counter</text><text class="node-lab" x="363" y="180" text-anchor="middle">SHOP / KOPITIAM</text></g>
-        <g class="node" style="color:#14B8A6"><circle cx="637" cy="118" r="26" fill="none" stroke="#14B8A6" stroke-width="2"></circle><text class="node-code" x="637" y="124" text-anchor="middle" fill="#14B8A6" font-size="13">DATA</text><text class="node-t" x="637" y="66" text-anchor="middle">Owner sees it</text><text class="node-lab" x="637" y="180" text-anchor="middle">EVERY DATA</text></g>
-        <g class="node" style="color:#5EEAD4"><circle cx="910" cy="118" r="26" fill="none" stroke="#5EEAD4" stroke-width="2"></circle><text class="node-code" x="910" y="124" text-anchor="middle" fill="#5EEAD4" font-size="12">BOOKS</text><text class="node-t" x="910" y="66" text-anchor="middle">Booked &amp; e-invoiced</text><text class="node-lab" x="910" y="180" text-anchor="middle">ACCOUNTS</text></g>
-      </svg>
-    </div>
-    <div class="chains rv d2">
-      <div class="c"><b>Stock received</b><span>Purchase order received into the warehouse, costs worked out, stock moved to the shops.</span></div>
-      <div class="c"><b>Sold at the counter</b><span>Scanned at the till, SST added, stock drops at that branch the moment it's paid.</span></div>
-      <div class="c"><b>Owner sees it</b><span>Today's sales, receipts, low stock and pending orders, live on Every Data.</span></div>
-      <div class="c"><b>Booked &amp; e-invoiced</b><span>Sales post to the accounts, MyInvois file ready, P&amp;L and SST up to date.</span></div>
-    </div>
   </div>
 </section>
 
 <!-- ONE PLATFORM -->
-<section class="sec">
+<section class="sec oa" id="one-account">
+  <div class="pin-sticky">
   <div class="wrap">
     <div class="grid g2 items-center gap-[clamp(1.5rem,4vw,3.5rem)]">
       <div class="stack rv"><span class="eyebrow">On one account</span>
@@ -430,18 +448,27 @@
         <p class="lead">One item record. One barcode. One price. Change it once and the till, the warehouse, the stock-take and the accounts all know, because there's only one copy.</p>
         <div class="chips"><span class="chip"><i class="dot"></i>Web + Android</span><span class="chip"><i class="dot"></i>3 languages</span><span class="chip"><i class="dot"></i>Multi-branch</span><span class="chip"><i class="dot"></i>Works offline</span><span class="chip"><i class="dot"></i>MyInvois ready</span><span class="chip"><i class="dot"></i>Dark mode</span></div>
       </div>
-      <div class="card glass card-pad-lg rv d1">
-        <div class="mock-row mb-[0.9rem]"><span class="mock-h">Item · <span class="code">2909000000028</span></span><span class="st warn">Low stock</span></div>
+      <div class="oa-stage">
+        <svg class="oa-lines" aria-hidden="true"></svg>
+        <span class="oa-node" data-app="pos" aria-hidden="true"><b>POS</b></span>
+        <span class="oa-node" data-app="scan" aria-hidden="true"><b>SCAN</b></span>
+        <span class="oa-node" data-app="wms" aria-hidden="true"><b>WMS</b></span>
+        <span class="oa-node" data-app="data" aria-hidden="true"><b>DATA</b></span>
+        <span class="oa-node" data-app="books" aria-hidden="true"><b>BOOKS</b></span>
+      <div class="card glass card-pad-lg oa-card">
+        <div class="mock-row mb-[0.9rem]"><span class="mock-h">Item · <span class="code">2909000000028</span></span><span class="st warn oa-low">Low stock</span></div>
         <table class="tbl"><tbody>
           <tr><td class="mono dim">Name</td><td>Rice 5kg</td></tr>
-          <tr><td class="mono dim">Selling price</td><td>RM 16.90 <span class="bin">Groceries</span></td></tr>
-          <tr><td class="mono dim">On hand</td><td>20 pcs <span class="bin">reorder at 20</span></td></tr>
+          <tr><td class="mono dim">Selling price</td><td><span class="oa-price">RM 16.90</span> <span class="bin">Groceries</span></td></tr>
+          <tr><td class="mono dim">On hand</td><td><span class="oa-qty">20</span> pcs <span class="bin">reorder at 20</span></td></tr>
           <tr><td class="mono dim">Value (cost)</td><td>RM 290.00</td></tr>
           <tr><td class="mono dim">Branches</td><td>Central Warehouse · Ipoh Shop</td></tr>
           <tr><td class="mono dim">Used by</td><td>POS · Scan · WMS · Every Data · Books</td></tr>
         </tbody></table>
       </div>
+      </div>
     </div>
+  </div>
   </div>
 </section>
 
@@ -450,27 +477,30 @@
   <div class="wrap">
     <div class="sec-head rv"><span class="eyebrow">Who it's for</span>
       <h2 class="h2">Built for the shops that keep Malaysia running</h2></div>
-    <div class="grid g4">
-      <div class="card rv"><span class="case-num">F&amp;B mode</span><h3 class="h3 text-[1.05rem] mt-2">Restaurants, cafés &amp; kopitiam</h3><p class="muted mt-2 text-(length:--fs-sm)">Tables and open tickets, add-ons like sweetness or extra egg, kitchen slips, dine-in, takeaway and delivery, service charge.</p></div>
-      <div class="card rv d1"><span class="case-num">Supermarket mode</span><h3 class="h3 text-[1.05rem] mt-2">Supermarkets &amp; mini-markets</h3><p class="muted mt-2 text-(length:--fs-sm)">Big scan box that never loses focus, 3× then scan for quantity, price check, weighed items, hold and recall.</p></div>
-      <div class="card rv d2"><span class="case-num">Retail mode</span><h3 class="h3 text-[1.05rem] mt-2">Retail shops</h3><p class="muted mt-2 text-(length:--fs-sm)">Clothing, hardware, stationery, phone shops: tap photos to sell, members and points, discounts, barcodes and NFC.</p></div>
-      <div class="card rv d3"><span class="case-num">WMS + Books</span><h3 class="h3 text-[1.05rem] mt-2">Wholesale &amp; multi-branch</h3><p class="muted mt-2 text-(length:--fs-sm)">A central warehouse feeding the shops, purchase orders to suppliers, transfers between branches, invoices to trade customers.</p></div>
+    <div class="grid g4 fan">
+      <div class="card rv"><svg class="bf-ico ico-cup" viewBox="0 0 48 48" aria-hidden="true"><path class="steam s1" d="M18 14c-2-3 2-5 0-8"/><path class="steam s2" d="M25 14c-2-3 2-5 0-8"/><path class="steam s3" d="M32 14c-2-3 2-5 0-8"/><path class="fill" d="M10 18h30v10a12 12 0 0 1-12 12h-6a12 12 0 0 1-12-12z"/><path class="stroke" d="M40 21h3a4 4 0 0 1 0 8h-4"/></svg><span class="case-num">F&amp;B mode</span><h3 class="h3 text-[1.05rem] mt-2">Restaurants, cafés &amp; kopitiam</h3><p class="muted mt-2 text-(length:--fs-sm)">Tables and open tickets, add-ons like sweetness or extra egg, kitchen slips, dine-in, takeaway and delivery, service charge.</p></div>
+      <div class="card rv d1"><svg class="bf-ico ico-cart" viewBox="0 0 48 48" aria-hidden="true"><g class="cart"><path class="stroke" d="M4 10h6l5 20h22l5-14H13"/><rect class="box b1" x="18" y="14" width="8" height="8" rx="1.5"/><rect class="box b2" x="28" y="12" width="8" height="10" rx="1.5"/><g class="wheel w1"><circle cx="18" cy="37" r="3.5"/><path d="M15.5 37h5"/></g><g class="wheel w2"><circle cx="34" cy="37" r="3.5"/><path d="M31.5 37h5"/></g></g><path class="ground" d="M2 44h44"/></svg><span class="case-num">Supermarket mode</span><h3 class="h3 text-[1.05rem] mt-2">Supermarkets &amp; mini-markets</h3><p class="muted mt-2 text-(length:--fs-sm)">Big scan box that never loses focus, 3× then scan for quantity, price check, weighed items, hold and recall.</p></div>
+      <div class="card rv d2"><svg class="bf-ico ico-tag" viewBox="0 0 48 48" aria-hidden="true"><path class="stroke" d="M24 3v7"/><g class="tag"><path class="fill" d="M14 10h20l4 8v22a3 3 0 0 1-3 3H13a3 3 0 0 1-3-3V18z"/><circle class="hole" cx="24" cy="16" r="2.5"/><path class="bars" d="M17 26v9M20 26v9M22.5 26v9M26 26v9M28.5 26v9M31 26v9"/></g></svg><span class="case-num">Retail mode</span><h3 class="h3 text-[1.05rem] mt-2">Retail shops</h3><p class="muted mt-2 text-(length:--fs-sm)">Clothing, hardware, stationery, phone shops: tap photos to sell, members and points, discounts, barcodes and NFC.</p></div>
+      <div class="card rv d3"><svg class="bf-ico ico-truck" viewBox="0 0 48 48" aria-hidden="true"><g class="truck"><rect class="fill" x="3" y="14" width="26" height="18" rx="2"/><path class="fill2" d="M29 20h9l6 7v5H29z"/><circle class="tyre" cx="12" cy="34" r="4"/><circle class="tyre" cx="36" cy="34" r="4"/></g><path class="road" d="M0 43h48"/></svg><span class="case-num">WMS + Books</span><h3 class="h3 text-[1.05rem] mt-2">Wholesale &amp; multi-branch</h3><p class="muted mt-2 text-(length:--fs-sm)">A central warehouse feeding the shops, purchase orders to suppliers, transfers between branches, invoices to trade customers.</p></div>
     </div>
   </div>
 </section>
 
 <!-- HOW TO START -->
-<section class="sec">
+<section class="sec gs">
   <div class="wrap">
     <div class="sec-head rv"><span class="eyebrow">Getting started</span>
       <h2 class="h2">From sign-up to first sale, the same day</h2></div>
-    <div class="grid g3">
+    <div class="gs-track" aria-hidden="true"><i></i><b class="gs-cart"></b><span style="left:0"></span><span style="left:50%"></span><span style="left:100%"></span></div>
+    <div class="grid g3 gs-steps">
       <div class="card rv"><span class="case-num">Step 01</span><h3 class="h3 mt-[0.6rem] mb-2">Register your company</h3><p class="muted text-(length:--fs-sm)">Create an account on the trial, or join your company's existing one. Add your branches and staff.</p></div>
       <div class="card rv d1"><span class="case-num">Step 02</span><h3 class="h3 mt-[0.6rem] mb-2">Bring in your items</h3><p class="muted text-(length:--fs-sm)">Scan barcodes with SuXin Barcode Scan, set prices and categories, enter opening stock per branch.</p></div>
       <div class="card rv d2"><span class="case-num">Step 03</span><h3 class="h3 mt-[0.6rem] mb-2">Open the till</h3><p class="muted text-(length:--fs-sm)">Pick your checkout mode, open a shift and start selling. Every screen has a built-in ▶ guide.</p></div>
     </div>
   </div>
 </section>
+
+<div class="belt" aria-hidden="true"></div>
 
 <!-- CTA -->
 <section class="sec-tight" id="start">
@@ -530,7 +560,9 @@
   </div>
 </footer>
 </div>
-<script src="assets/i18n.js?v=e50a1dd6" defer></script>
+<script src="assets/i18n.js?v=4875a974" defer></script>
 <script src="assets/site.js?v=f52f647a" defer></script>
+<script src="assets/home-scroll.js?v=b5c17280" defer></script>
+<script src="assets/warehouse.js?v=8d1aa5b9" defer></script>
 </body>
 </html>

@@ -508,12 +508,47 @@ window.SUXIN_I18N = {
     'Pinduoduo buying and cost calculator': ['拼多多进货和成本计算器', 'Pembelian Pinduoduo dan kalkulator kos'],
     'Landed-cost calculator for Pinduoduo buying': ['拼多多进货的到岸成本计算器', 'Kalkulator kos tiba untuk pembelian Pinduoduo'],
     'Pinduoduo buying': ['拼多多进货', 'Pembelian Pinduoduo'],
+    // Scroll story over the warehouse (homepage)
+    'Scroll to walk the warehouse': ['往下滑，走一趟仓库', 'Tatal untuk meninjau gudang'],
+    'SuXin WMS · Receiving': ['SuXin WMS · 收货', 'SuXin WMS · Penerimaan'],
+    'Stock arrives. Every carton counted in.': ['货到了，每一箱都点清楚。', 'Stok tiba. Setiap kotak dikira masuk.'],
+    'The lorry backs into the dock, the purchase order is ticked off line by line, and the landed cost is worked out as the cartons roll down the belt.':
+      ['货车倒进卸货区，采购单一行一行对，纸箱沿着输送带进来，到岸成本也同时算好。',
+       'Lori berundur ke dok, pesanan belian ditanda baris demi baris, dan kos pendaratan dikira semasa kotak bergerak di atas tali sawat.'],
+    'SuXin WMS · Stock': ['SuXin WMS · 库存', 'SuXin WMS · Stok'],
+    'Every shelf, every branch, one stock count.': ['每个货架、每间分店，只有一个库存数。', 'Setiap rak, setiap cawangan, satu kiraan stok.'],
+    'Put away by shelf and warehouse. Transfers move stock from the central warehouse to the shops, and every move is recorded on both sides.':
+      ['按货架和仓库上架。调货把库存从中央仓库送到各分店，每一次移动两边都有记录。',
+       'Simpan mengikut rak dan gudang. Pindahan menghantar stok dari gudang pusat ke kedai, dan setiap pergerakan direkod di kedua-dua belah.'],
+    'Central Warehouse → Ipoh Shop': ['中央仓库 → 怡保分店', 'Gudang Pusat → Kedai Ipoh'],
+    'SuXin Barcode Scan · Stock-take': ['SuXin Barcode Scan · 盘点', 'SuXin Barcode Scan · Kira stok'],
+    'Scan the shelf. The count fixes itself.': ['扫一扫货架，数量自己对上。', 'Imbas rak. Kiraan betul sendiri.'],
+    'Walk the aisle with a phone camera or a barcode scanner. Differences go straight into SuXin WMS, so the number on screen matches the shelf.':
+      ['拿手机镜头或扫码枪走一遍货架，差额直接进 SuXin WMS，屏幕上的数字跟货架上的一样。',
+       'Jalan di lorong dengan kamera telefon atau pengimbas kod bar. Perbezaan terus masuk ke SuXin WMS, jadi nombor di skrin sama dengan di rak.'],
+    '2909000000028 · Rice 5kg · 20 → 19': ['2909000000028 · 白米 5kg · 20 → 19', '2909000000028 · Beras 5kg · 20 → 19'],
+    'SuXin POS · Counter': ['SuXin POS · 柜台', 'SuXin POS · Kaunter'],
+    'Sold at the counter. Stock drops at once.': ['柜台卖出，库存马上扣。', 'Dijual di kaunter. Stok terus berkurang.'],
+    "Scan, scan, charge. SST goes on the bill, the receipt prints, and the item leaves that branch's stock the moment it's paid, even offline.":
+      ['扫、扫、收钱。SST 自动加进账单，收据打印出来，付款那一刻就从该分店库存扣掉，断网也一样。',
+       'Imbas, imbas, caj. SST masuk ke bil, resit dicetak, dan item keluar dari stok cawangan itu sebaik dibayar, walaupun luar talian.'],
+    "SuXin Every Data · Owner's view": ['SuXin Every Data · 老板后台', 'SuXin Every Data · Paparan pemilik'],
+    'The owner sees it, from anywhere.': ['老板在哪里都看得到。', 'Pemilik nampak, dari mana-mana.'],
+    "Today's sales, receipts, low stock and purchase orders waiting, live on Every Data. Check it from your phone between suppliers.":
+      ['今天的销售、收据、低库存和待收的采购单，Every Data 上实时显示。见供应商的空档拿手机看一眼就好。',
+       'Jualan hari ini, resit, stok rendah dan pesanan belian yang menunggu, terus di Every Data. Semak dari telefon antara jumpa pembekal.'],
+    'SuXin Books · Accounts': ['SuXin Books · 账务', 'SuXin Books · Akaun'],
+    'Booked, e-invoiced, done.': ['入账、电子发票，搞定。', 'Direkod, e-invois, siap.'],
+    'Sales post to the accounts by themselves. The MyInvois file is ready, and P&L and SST stay up to date for you or your accountant.':
+      ['销售自动入账，MyInvois 文件准备好，损益表和 SST 随时是最新的，给你或你的会计师看。',
+       'Jualan masuk ke akaun dengan sendiri. Fail MyInvois sedia, dan untung rugi serta SST sentiasa terkini untuk anda atau akauntan anda.'],
     // Sample data: branches, categories and items, one name per language
     'Ipoh Shop': ['怡保分店', 'Kedai Ipoh'],
     'Central Warehouse': ['中央仓库', 'Gudang Pusat'],
     'Central Warehouse · Ipoh Shop': ['中央仓库 · 怡保分店', 'Gudang Pusat · Kedai Ipoh'],
     'Groceries': ['杂货', 'Barang runcit'],
     '20 pcs': ['20 件', '20 unit'],
+    'pcs': ['件', 'unit'],
     'Malt Drink 1kg': ['麦芽饮料 1kg', 'Minuman Malt 1kg'],
     'Ground Coffee 500g': ['咖啡粉 500g', 'Kopi 500g'],
     'Rice 5kg': ['白米 5kg', 'Beras 5kg'],
