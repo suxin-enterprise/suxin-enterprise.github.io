@@ -444,14 +444,27 @@
   var camNow = null, camTarget = [18, 13, 1];
   // Scene bounds in screen units (floor corners + rack height)
   var minX = P(0, FD)[0], maxX = P(FW, 0)[0], minY = P(0, 0, 4)[1], maxY = P(FW, FD, -0.7)[1];
+  // Wide screens: the text sits on the left of the centred column, so frame the warehouse in the rest
+  // of that column (measured from the real text block), letting it run a little past the column's right
+  // edge; text + warehouse then read as one centred pair and never overlap.
+  var heroText = document.querySelector('.story-hero'), heroWrap = heroText && heroText.parentNode;
+  var picX = 0;
   function resize() {
     W = stage.clientWidth; H = stage.clientHeight;
     svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-    var wide = W > 900;
-    var availW = wide ? W * 0.66 : W * 1.08, availH = wide ? H * 0.86 : H * 0.62;
+    var wide = W > 900, availW = W * 1.08, availH = H * 0.62;
+    picX = 0;
+    if (wide) {
+      availW = W * 0.66; availH = H * 0.86;
+      if (heroText) {
+        var wr = heroWrap.getBoundingClientRect(), hr = heroText.getBoundingClientRect();
+        var left = hr.right + 32, right = Math.min(wr.right - parseFloat(getComputedStyle(heroWrap).paddingRight) + 160, W - 90);
+        if (right - left >= 480) { picX = (left + right) / 2; availW = (right - left) * 1.12; availH = H * 0.8; }
+      }
+    }
     fitScale = Math.min(availW / (maxX - minX), availH / (maxY - minY));
   }
-  function anchor() { return W > 900 ? [W * 0.62, H * 0.53] : [W * 0.5, H * 0.33]; }
+  function anchor() { return W > 900 ? [picX || W * 0.62, H * 0.53] : [W * 0.5, H * 0.33]; }
   function applyCam(c) {
     var s = fitScale * c[2], q = P(c[0], c[1], 0.8), a = anchor();
     cam.setAttribute('transform', 'translate(' + (a[0] - q[0] * s).toFixed(1) + ' ' + (a[1] - q[1] * s).toFixed(1) + ') scale(' + s.toFixed(4) + ')');
