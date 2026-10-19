@@ -1,41 +1,24 @@
-/* Product pages: pinned split screen. The copy on the left swaps step by step while
-   the product's own animated scene on the right plays along with the scroll. */
+/* Product pages: intro on the left, the product's still scene on the right, then the
+   feature cards in a grid. Nothing moves. */
 
 .site .pstory { position: relative; }
-html.js .site .pstory { height: calc(var(--n) * 90svh + 10svh); }
-.site .pstory-stage { position: relative; overflow: hidden; padding-block: 3rem; }
-html.js .site .pstory-stage { position: sticky; top: 0; height: 100vh; height: 100svh; padding-block: 66px 0; display: flex; align-items: center; }
+.site .pstory-stage { position: relative; overflow: hidden; padding-block: calc(66px + 2.5rem) 3rem; }
 .site .pstory-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); align-items: center; gap: clamp(1.5rem, 4vw, 3.5rem); }
+.site .pstory-copy .h1 { margin: 0; }
+.site .pstory-copy .lead { margin-top: 1rem; }
+.site .pstory-copy .badge { display: inline-flex; }
 
-/* Copy: panels stacked in one spot, the active one shown */
-.site .pstory-panels { position: relative; display: grid; gap: 2.5rem; }
-html.js .site .pstory-panels { display: block; min-height: 470px; }
-html.js .site .pstory-panel {
-  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
-  opacity: 0; visibility: hidden; transform: translateY(36px); filter: blur(6px);
-  transition: opacity .55s var(--ease), transform .7s var(--ease-pop), filter .55s var(--ease), visibility 0s .7s;
-}
-html.js .site .pstory-panel.is-past { transform: translateY(-36px); }
-html.js .site .pstory-panel.is-on { opacity: 1; visibility: visible; transform: none; filter: none; transition-delay: .08s, .08s, .08s, 0s; }
-.site .pstory-panel .h1 { margin: 0; }
-.site .pstory-panel .lead { margin-top: 1rem; }
-.site .pstory-panel .h2 { margin-top: .9rem; max-width: 18ch; }
-.site .pstory-panel .story-list li { font-size: var(--fs-body); }
-.site .pstory-panel .story-num { font-size: clamp(3rem, 6vw, 4.6rem); }
-.site .pstory-panel .story-who { font-size: clamp(1.2rem, 2vw, 1.55rem); max-width: 26ch; }
-
-/* Progress segments, story-style */
-.site .pstory-segs { display: none; }
-html.js .site .pstory-segs { display: flex; gap: .4rem; margin-top: 1.5rem; max-width: 420px; }
-.site .pstory-segs button { flex: 1; height: 22px; display: flex; align-items: center; cursor: pointer; }
-.site .pstory-segs button::before { content: ""; display: block; width: 100%; height: 4px; border-radius: 4px; background: var(--surface-2); }
-.site .pstory-segs button { position: relative; }
-.site .pstory-segs i { position: absolute; left: 0; top: 9px; height: 4px; width: 100%; border-radius: 4px; background: var(--grad); transform-origin: 0 50%; transform: scaleX(0); }
+/* Feature cards */
+.site .pfeats { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 1.25rem; }
+.site .pfeat { padding: clamp(1.25rem, 2vw, 1.6rem); }
+.site .pfeat .story-num { font-size: clamp(2.2rem, 3.6vw, 3rem); }
+.site .pfeat .h3 { margin-top: .75rem; }
+.site .pfeat .story-who { font-size: clamp(1.05rem, 1.6vw, 1.25rem); }
 
 /* Scene frame */
 .site .pstory-scene {
   position: relative; border-radius: var(--r-xl); border: 1px solid var(--line); background: var(--surface);
-  box-shadow: var(--shadow); overflow: hidden; aspect-ratio: 600 / 480; max-height: calc(100svh - 104px); width: 100%; margin-inline: auto;
+  box-shadow: var(--shadow); overflow: hidden; aspect-ratio: 600 / 480; width: 100%; margin-inline: auto;
 }
 .site .pstory-scene::before {
   content: ""; position: absolute; inset: 0; pointer-events: none;
@@ -45,18 +28,9 @@ html.js .site .pstory-segs { display: flex; gap: .4rem; margin-top: 1.5rem; max-
 .site .ps-svg { position: relative; display: block; width: 100%; height: 100%; }
 
 @media (width <= 900px) {
-  html.js .site .pstory { height: calc(var(--n) * 100svh); }
-  html.js .site .pstory-stage { padding-top: 70px; align-items: flex-start; }
-  .site .pstory-grid { grid-template-columns: 1fr; gap: 1rem; }
-  .site .pstory-scene { order: -1; max-height: 40svh; aspect-ratio: 600 / 440; }
-  html.js .site .pstory-panels { min-height: calc(100svh - 40svh - 150px); }
-  html.js .site .pstory-panel { justify-content: flex-start; }
-  .site .pstory-body, .site .pstory-panel .crumbs { display: none; }
-  .site .pstory-panel .story-num { font-size: 2rem; }
-  .site .pstory-panel .h2 { font-size: 1.45rem; margin-top: .6rem; }
-  .site .pstory-panel .story-list { gap: .3rem; margin-top: .6rem; }
-  .site .pstory-panel .story-list li { font-size: var(--fs-sm); }
-  html.js .site .pstory-segs { margin-top: .75rem; max-width: none; }
+  .site .pstory-stage { padding-top: calc(66px + 1.5rem); }
+  .site .pstory-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .site .pstory-scene { aspect-ratio: 600 / 440; }
 }
 
 /* ---------- scene palette (follows the colour theme) ---------- */

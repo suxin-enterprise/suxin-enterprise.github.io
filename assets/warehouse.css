@@ -1,5 +1,5 @@
-/* SuXin homepage: scroll story over the isometric warehouse, plus scroll effects
-   for the rest of the page. Loaded only by index.html, after site.css and suxin.css. */
+/* SuXin homepage: the still isometric warehouse behind the hero, plus shared static
+   pieces (conveyor dividers, feature lists) used by the product pages. No animation. */
 
 /* ---------- warehouse materials (three tones per block: top, left, right) ---------- */
 .site {
@@ -42,11 +42,11 @@
 .wh polygon { stroke-linejoin: round; }
 .wh-grid { fill: none; stroke: #ffffff0d; stroke-width: 1; }
 .wh-lane { fill: var(--wh-lane); fill-opacity: var(--wh-lane-op); }
-.wh-lane-dash { fill: none; stroke: #5eead4; stroke-width: 1.6; stroke-dasharray: 2 10; stroke-linecap: round; opacity: .55; animation: wh-dash 1.6s linear infinite; }
+.wh-lane-dash { fill: none; stroke: #5eead4; stroke-width: 1.6; stroke-dasharray: 2 10; stroke-linecap: round; opacity: .55; }
 .wh-mark { fill: none; stroke: #fbbf2466; stroke-width: 1.4; stroke-dasharray: 6 5; }
 .wh-plate { fill: #ffffff06; stroke: #5eead433; stroke-width: 1; }
 .wh-shoptile { fill: #ffffff0a; }
-.wh-belt-run { fill: none; stroke: #5eead4; stroke-width: 1.2; stroke-dasharray: 3 6; opacity: .5; animation: wh-dash .9s linear infinite reverse; }
+.wh-belt-run { fill: none; stroke: #5eead4; stroke-width: 1.2; stroke-dasharray: 3 6; opacity: .5; }
 .wh-tape { fill: none; stroke: #9a6a34; stroke-width: 2; }
 .wh-brand text { fill: #0d9488; font: 700 .82px var(--f-display); letter-spacing: -.02em; }
 .wh-brand-mark { fill: #10b981; }
@@ -66,15 +66,7 @@
 .wh-armbase { fill: #0b1a27; opacity: .6; }
 .wh-beam { fill: #5eead4; }
 .wh-rotor { fill: #ffffff40; stroke: #ffffff8c; stroke-width: 1; }
-.wh-led { fill: #a7f3d0; animation: wh-blink 1.2s ease-in-out infinite; }
-.wh-ring ellipse { fill: none; stroke: #5eead4; stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; }
-.wh-ring ellipse.a { fill: #5eead414; stroke-dasharray: 8 6; }
-.wh-ring.on ellipse.a { opacity: .9; animation: wh-spin 14s linear infinite; }
-.wh-ring.on ellipse.b { animation: wh-pulse 2.2s var(--ease) infinite; }
-@keyframes wh-dash { to { stroke-dashoffset: -24; } }
-@keyframes wh-blink { 50% { opacity: .2; } }
-@keyframes wh-pulse { 0% { opacity: .8; transform: scale(.6); } 100% { opacity: 0; transform: scale(1.35); } }
-@keyframes wh-spin { to { stroke-dashoffset: -140; } }
+.wh-led { fill: #a7f3d0; }
 
 /* Light theme: grey warehouse like an architect's drawing, brand-green robots */
 :root[data-theme=light] .site { --wh-lane: #ffffff; --wh-lane-op: 1; --wh-shadow: #0b1b2b26; --wh-screen: #0b1b2b; --wh-legs: #3d5566; }
@@ -92,14 +84,11 @@
 :root[data-theme=light] .wh-shoptile { fill: #ffffff59; }
 :root[data-theme=light] .wh-armbase { fill: #3e4b52; opacity: .35; }
 :root[data-theme=light] .wh-rotor { fill: #0b1b2b26; stroke: #0b1b2b59; }
-:root[data-theme=light] .wh-ring ellipse { stroke: #0d9488; }
-:root[data-theme=light] .wh-ring ellipse.a { fill: #0d948814; }
 
-/* ---------- scroll story layout ---------- */
-.site .story { position: relative; }
-.site .story-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; z-index: 0; }
-.site .story-scene { position: absolute; inset: 0; opacity: 0; transition: opacity .9s var(--ease); }
-.site .story-stage.is-ready .story-scene { opacity: 1; }
+/* ---------- hero over the warehouse picture ---------- */
+.site .story { position: relative; min-height: 100vh; min-height: 100svh; }
+.site .story-stage { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
+.site .story-scene { position: absolute; inset: 0; }
 .site .story-stage::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background:
@@ -108,36 +97,13 @@
     linear-gradient(180deg, color-mix(in srgb, var(--bg) 70%, transparent) 0%, transparent 18%);
 }
 .site .story-stage .glow { z-index: 0; }
-.site .story-steps { position: relative; z-index: 2; margin-top: -100vh; margin-top: -100svh; pointer-events: none; }
-.site .story-step { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding-block: 6rem; }
-.site .story-step:first-child { min-height: calc(100svh - 0px); padding-top: 4rem; }
-.site .story-step :is(a, button, .story-card) { pointer-events: auto; }
+.site .story-steps { position: relative; z-index: 2; pointer-events: none; }
+.site .story-step { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding-block: 4rem 6rem; }
+.site .story-step :is(a, button) { pointer-events: auto; }
 .site .story-hero { max-width: 610px; }
 .site .story-hero .lead { max-width: 52ch; margin-top: 1.15rem; }
 .site .story-hero h1 { margin-top: 1.15rem; }
-.site .story-card {
-  max-width: 430px; padding: clamp(1.25rem, 2vw, 1.75rem); border-radius: var(--r-lg);
-  border: 1px solid var(--glass-line); background: var(--glass); box-shadow: var(--shadow);
-  -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5);
-  transition: opacity .5s var(--ease), transform .6s var(--ease-pop);
-}
-html.js .site .story-step:not(.is-active) .story-card { opacity: .28; transform: translateY(14px) scale(.98); }
 .site .story-num { font: 800 clamp(2.6rem, 4.6vw, 3.6rem)/1 var(--f-display); letter-spacing: -.04em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; display: block; margin-bottom: .6rem; }
-.site .story-card .h3 { margin-top: .75rem; }
-.site .story-card p { color: var(--tx-2); font-size: var(--fs-sm); margin-top: .6rem; text-wrap: pretty; }
-.site .story-meta { display: flex; align-items: center; gap: .5rem; margin-top: 1rem; padding-top: .85rem; border-top: 1px solid var(--line); font: 500 var(--fs-mono)/1.4 var(--f-mono); letter-spacing: .04em; color: var(--tx-3); }
-.site .story-meta i { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 4px #22c55e26; flex: none; }
-.site .story-card .link-arrow { margin-top: .9rem; display: inline-flex; }
-
-.site .story-rail { position: absolute; right: clamp(.75rem, 2vw, 1.75rem); top: 50%; transform: translateY(-50%); z-index: 3; display: flex; flex-direction: column; gap: .45rem; }
-.site .story-rail a { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font: 600 .6rem/1 var(--f-mono); color: var(--tx-3); border: 1px solid var(--line-strong); background: var(--glass); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: all .3s var(--ease); }
-.site .story-rail a:hover { color: var(--tx); border-color: var(--tx-3); }
-.site .story-rail a.on { color: #fff; background: var(--grad); border-color: transparent; transform: scale(1.12); box-shadow: 0 8px 18px -8px #10b981e6; }
-
-.site .scroll-hint { display: inline-flex; align-items: center; gap: .7rem; margin-top: 2.2rem; font: 500 var(--fs-mono)/1 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--tx-3); }
-.site .scroll-hint .mouse { width: 20px; height: 32px; border: 1.5px solid var(--tx-3); border-radius: 12px; position: relative; }
-.site .scroll-hint .mouse::after { content: ""; position: absolute; left: 50%; top: 6px; width: 3px; height: 7px; margin-left: -1.5px; border-radius: 2px; background: var(--gold); animation: wh-wheel 1.8s var(--ease) infinite; }
-@keyframes wh-wheel { 0% { opacity: 0; transform: translateY(-3px); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(10px); } }
 
 @media (width <= 900px) {
   .site .story-stage::after {
@@ -147,34 +113,10 @@ html.js .site .story-step:not(.is-active) .story-card { opacity: .28; transform:
   }
   .site .story-step { align-items: flex-end; padding-block: 4rem 2.5rem; }
   .site .story-step:first-child { padding-top: 40svh; }
-  .site .story-card { max-width: none; }
   .site .story-num { font-size: 2.1rem; margin-bottom: .3rem; }
-  .site .story-rail { top: auto; bottom: auto; top: 5.2rem; transform: none; flex-direction: row; right: 50%; translate: 50% 0; gap: .35rem; }
-  .site .story-rail a { width: 24px; height: 24px; font-size: .52rem; }
-  .site .scroll-hint { display: none; }
 }
 
-/* ---------- page-wide scroll effects ---------- */
-.site .scroll-prog { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 120; background: var(--grad); transform-origin: 0 50%; transform: scaleX(0); pointer-events: none; }
-
-@media (prefers-reduced-motion: no-preference) {
-  html.js .site .rv:not([data-in]) { opacity: 0; transform: translateY(46px) scale(.97); filter: blur(4px); }
-  html.js .site .rv[data-in] { transition: opacity .8s var(--ease), transform .9s var(--ease-pop), filter .8s var(--ease); }
-}
-
-/* Products: pinned, and the cards slide sideways as you scroll (wide screens) */
-.site .hpin.is-on { padding-block: 0; }
-.site .hpin.is-on .hpin-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; padding-top: 66px; }
-.site .hpin.is-on .hpin-track { display: flex; gap: 1.25rem; width: max-content; will-change: transform; padding-right: var(--gutter); }
-.site .hpin.is-on .hpin-track > .card { width: 350px; flex: none; }
-.site .hpin.is-on .sec-head { margin-bottom: clamp(1rem, 2vw, 1.75rem); gap: .6rem; max-width: none; }
-.site .hpin.is-on .sec-head .lead { display: none; }
-@media (height < 820px) { .site .hpin.is-on .h2 { font-size: clamp(1.5rem, 2.4vw, 2rem); } }
-.site .hpin-bar { display: none; }
-.site .hpin.is-on .hpin-bar { display: block; height: 3px; border-radius: 3px; background: var(--surface-2); margin-top: 1.5rem; overflow: hidden; }
-.site .hpin-bar i { display: block; height: 100%; width: 100%; background: var(--grad); transform-origin: 0 50%; transform: scaleX(0); }
-
-/* Conveyor belt divider: cartons move as the page scrolls */
+/* Conveyor belt divider (still picture) */
 .site .belt { position: relative; height: 92px; overflow: hidden; margin-block: clamp(.5rem, 2vw, 1.5rem); }
 .site .belt svg { position: absolute; left: 0; bottom: 0; width: 100%; height: 92px; display: block; }
 .site .belt .rail { fill: var(--surface-2); stroke: var(--line-strong); }
@@ -187,30 +129,13 @@ html.js .site .story-step:not(.is-active) .story-card { opacity: .28; transform:
 .site .belt .ctn-label { fill: #0b1b2b; font: 600 9px var(--f-mono); letter-spacing: .08em; }
 .site .belt .ctn-tag { fill: #fff; }
 
-/* Cards in a pinned track tilt and lift as they pass the middle of the screen */
-.site .hpin.is-on .hpin-track { perspective: 1400px; }
-.site .hpin.is-on .hpin-track > * { transform-origin: 50% 60%; transition: transform .18s linear, opacity .18s linear, border-color .3s, box-shadow .3s; }
-.site .hpin.is-on .hpin-track > .is-focus { border-color: color-mix(in srgb, var(--orange) 55%, transparent); box-shadow: 0 30px 70px -36px #10b981b3; }
-.site .hpin.is-on .hpin-track > .is-focus .glowline { opacity: 1; }
-.site .hpin.is-on .hpin-track > .is-focus .pcard-tag { animation: wh-bob 1.6s var(--ease) infinite; }
-@keyframes wh-bob { 50% { transform: translateY(-4px); } }
-
-/* Progress bar under the track, with a little robot cart carrying a carton */
-.site .hpin.is-on .hpin-bar { overflow: visible; position: relative; margin-top: 2.6rem; }
-.site .hpin-bar i { border-radius: 3px; }
-.site .hpin-cart { display: none; }
-.site .hpin.is-on .hpin-cart { display: block; position: absolute; bottom: 3px; left: 0; width: 34px; height: 30px; margin-left: -17px; pointer-events: none; }
-.site .hpin-cart::before { content: ""; position: absolute; left: 3px; right: 3px; bottom: 0; height: 9px; border-radius: 3px; background: linear-gradient(180deg, #34d399, #0d9488); box-shadow: 0 6px 12px -6px #10b981; }
-.site .hpin-cart::after { content: ""; position: absolute; left: 8px; width: 18px; bottom: 9px; height: 15px; border-radius: 2px; background: linear-gradient(90deg, #e2bb84 0 46%, #9a6a34 46% 54%, #e2bb84 54%); box-shadow: inset -4px 0 0 #c1925a; animation: wh-bob .5s ease-in-out infinite; }
-
-/* Product pages: feature lists in the story cards, screens as a sideways track */
+/* Product pages: feature lists in the story cards, screens in a grid */
 .site .story-list { list-style: none; padding: 0; margin: .9rem 0 0; display: flex; flex-direction: column; gap: .5rem; }
 .site .story-list li { position: relative; padding-left: 1.1rem; font-size: var(--fs-sm); color: var(--tx-2); line-height: 1.5; }
 .site .story-list li::before { content: ""; position: absolute; left: 0; top: .52em; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); }
 .site .story-who { margin-top: .75rem; font: 600 1.08rem/1.4 var(--f-display); color: var(--tx); }
 .site .story-hero .crumbs { margin-bottom: .25rem; }
 .site .story-hero .badge { display: inline-flex; }
-.site .shots { grid-template-columns: 1fr; gap: 1.25rem; }
+.site .shots { grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 1.25rem; }
 .site .shot { margin: 0; padding: clamp(.8rem, 1.6vw, 1.1rem); }
 .site .shot .car-cap { margin-top: .75rem; }
-.site .hpin.is-on .hpin-track > .shot { width: min(640px, 58vw); }

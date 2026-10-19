@@ -40,3 +40,11 @@
 }
 /* Chinese headings: break between phrases, not in the middle of one */
 html[lang="zh-Hans"] .site :is(.display, .h1, .h2) { word-break: keep-all; text-wrap: balance; }
+
+/* The site is fully static: no animations, transitions, hover lifts, smooth scrolling or
+   scroll-in reveals anywhere, whatever the shared layout system above asks for. */
+html { scroll-behavior: auto !important; }
+.site *, .site *::before, .site *::after { animation: none !important; transition: none !important; }
+.site :is(a, button, .card, .chip, .mega-item):hover,
+.site :is(a, button, .card, .chip, .mega-item):hover * { transform: none !important; }
+html.js .site .rv { opacity: 1 !important; transform: none !important; filter: none !important; }

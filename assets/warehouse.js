@@ -1,6 +1,6 @@
-// SuXin homepage: the animated isometric warehouse and the scroll story around it.
-// Everything is drawn here as SVG (no images). The scene sits in a sticky stage; the
-// story steps scroll over it and each step moves the camera to its part of the warehouse.
+// SuXin homepage: the isometric warehouse behind the hero, drawn once as a still picture.
+// Everything is drawn here as SVG (no images). Nothing moves: the scene is posed once and
+// only re-fitted when the window is resized.
 (function () {
   'use strict';
 
@@ -10,7 +10,6 @@
   var NS = 'http://www.w3.org/2000/svg';
   var U = 20;                       // pixels per world unit
   var C = Math.cos(Math.PI / 6), S = 0.5;
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------- drawing helpers ----------
   function P(x, y, z) { return [(x - y) * C * U, ((x + y) * S - (z || 0)) * U]; }
@@ -373,19 +372,7 @@
     objs.insertBefore(node, lo < statics.length ? statics[lo].node : null);
   }
 
-  // Focus rings: one per story step
   var STEPS = Array.prototype.slice.call(document.querySelectorAll('.story-step'));
-  var rings = STEPS.map(function (st) {
-    var c = (st.getAttribute('data-cam') || '18,13,1').split(',').map(Number);
-    var r = Number(st.getAttribute('data-ring') || 0);
-    var g = el('g', { 'class': 'wh-ring' }, fx);
-    if (r) {
-      var o = P(c[0], c[1], 0.05);
-      el('ellipse', { cx: o[0], cy: o[1], rx: r * U * 1.22, ry: r * U * 0.71, 'class': 'a' }, g);
-      el('ellipse', { cx: o[0], cy: o[1], rx: r * U * 1.22, ry: r * U * 0.71, 'class': 'b' }, g);
-    }
-    return g;
-  });
 
   function frame(t) {
     // AGVs
@@ -441,7 +428,6 @@
 
   // ---------- camera ----------
   var W = 0, H = 0, fitScale = 1;
-  var camNow = null, camTarget = [18, 13, 1];
   // Scene bounds in screen units (floor corners + rack height)
   var minX = P(0, FD)[0], maxX = P(FW, 0)[0], minY = P(0, 0, 4)[1], maxY = P(FW, FD, -0.7)[1];
   // Wide screens: the text sits on the left of the centred column, so frame the warehouse in the rest
@@ -477,69 +463,24 @@
       return ((narrow && st.getAttribute('data-cam-m')) || st.getAttribute('data-cam') || '18,13,1').split(',').map(Number);
     });
   }
-  var dots = Array.prototype.slice.call(document.querySelectorAll('.story-rail a'));
-  var active = -1;
-  function readScroll() {
-    var vc = window.innerHeight * 0.5, centers = STEPS.map(function (st) { var r = st.getBoundingClientRect(); return r.top + r.height / 2; });
-    var i = 0;
-    while (i < centers.length - 1 && centers[i + 1] <= vc) i++;
-    var f = 0;
-    if (i < centers.length - 1 && centers[i] < vc) f = Math.min(1, (vc - centers[i]) / (centers[i + 1] - centers[i]));
-    // Hold on each step, move between them
-    var e = f < 0.25 ? 0 : f > 0.75 ? 1 : (f - 0.25) / 0.5;
-    e = e * e * (3 - 2 * e);
-    var a = cams[i], b = cams[Math.min(i + 1, cams.length - 1)];
-    camTarget = [a[0] + (b[0] - a[0]) * e, a[1] + (b[1] - a[1]) * e, a[2] + (b[2] - a[2]) * e];
-    var now = f > 0.5 ? Math.min(i + 1, STEPS.length - 1) : i;
-    if (now !== active) {
-      active = now;
-      STEPS.forEach(function (st, k) { st.classList.toggle('is-active', k === now); });
-      rings.forEach(function (r, k) { r.classList.toggle('on', k === now); });
-      dots.forEach(function (d, k) { d.classList.toggle('on', k === now); if (k === now) d.setAttribute('aria-current', 'step'); else d.removeAttribute('aria-current'); });
-      stage.setAttribute('data-step', now);
-    }
+  function fit() {
+    resize();
+    readCams();
+    applyCam(cams[0]);
   }
 
-  // ---------- loop ----------
-  var visible = true, last = 0, clock = 0, running = false;
-  function tick(ts) {
-    running = false;
-    var dt = last ? Math.min(0.05, (ts - last) / 1000) : 0;
-    last = ts;
-    clock += dt;
-    if (!camNow) camNow = camTarget.slice();
-    var k = reduceMotion ? 1 : 1 - Math.pow(0.0018, dt);
-    for (var j = 0; j < 3; j++) camNow[j] += (camTarget[j] - camNow[j]) * k;
-    applyCam(camNow);
-    if (!reduceMotion) frame(clock);
-    if (visible && !reduceMotion) request();
-  }
-  function request() { if (!running) { running = true; requestAnimationFrame(tick); } }
-
-  resize();
-  readCams();
-  readScroll();
+  // Pose every moving part once and leave it there
   frame(4);
-  camNow = camTarget.slice();
-  applyCam(camNow);
-  window.addEventListener('resize', function () { resize(); readCams(); readScroll(); camNow = camTarget.slice(); applyCam(camNow); });
-  window.addEventListener('scroll', function () { readScroll(); request(); }, { passive: true });
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (en) {
-      visible = en[0].isIntersecting;
-      if (visible) { last = 0; request(); }
-    }).observe(stage);
-  }
-  document.addEventListener('visibilitychange', function () { if (!document.hidden) { last = 0; request(); } });
-  request();
+  fit();
+  window.addEventListener('resize', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
   stage.classList.add('is-ready');
 })();
 
-// Page-wide scroll effects: progress bar, pinned product slider, conveyor dividers.
+// Conveyor dividers between sections, drawn as still pictures.
 (function () {
   'use strict';
   var NS = 'http://www.w3.org/2000/svg';
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function el(tag, attrs, parent) {
     var n = document.createElementNS(NS, tag);
     for (var k in attrs) n.setAttribute(k, attrs[k]);
@@ -547,32 +488,9 @@
     return n;
   }
 
-  var bar = document.querySelector('.scroll-prog');
-
-  // Products slide sideways while the section is pinned
-  var pin = document.querySelector('.hpin');
-  var track = pin && pin.querySelector('.hpin-track');
-  var pinBar = pin && pin.querySelector('.hpin-bar i');
-  var pinCart = pin && pin.querySelector('.hpin-cart');
-  var pinCards = track ? Array.prototype.slice.call(track.children) : [];
-  var shift = 0;
-  function layoutPin() {
-    if (!pin) return;
-    var on = !reduceMotion && window.innerWidth > 900 && window.innerHeight >= 660;
-    pin.classList.toggle('is-on', on);
-    track.style.transform = '';
-    pinCards.forEach(function (c) { c.style.transform = ''; c.style.opacity = ''; c.classList.remove('is-focus'); });
-    if (!on) { pin.style.height = ''; shift = 0; return; }
-    // The scroll motion below replaces the fade-in for these cards
-    pinCards.forEach(function (c) { c.setAttribute('data-in', ''); });
-    shift = Math.max(0, track.scrollWidth + track.getBoundingClientRect().left - window.innerWidth);
-    pin.style.height = (window.innerHeight + shift) + 'px';
-  }
-
-  // Conveyor dividers
   var belts = Array.prototype.slice.call(document.querySelectorAll('.belt')).map(function (host) {
     var svg = el('svg', { 'aria-hidden': 'true', focusable: 'false' }, host);
-    return { host: host, svg: svg, w: 0, cartons: [], rollers: [] };
+    return { host: host, svg: svg, w: 0 };
   });
   var TAGS = ['POS', 'SCAN', 'WMS', 'DATA', 'BOOKS', 'SuXin'];
   function buildBelt(b) {
@@ -583,13 +501,11 @@
     b.svg.setAttribute('viewBox', '0 0 ' + w + ' 92');
     for (var x = 30; x < w; x += 180) el('rect', { 'class': 'leg', x: x, y: 70, width: 4, height: 22 }, b.svg);
     el('rect', { 'class': 'rail', x: -2, y: 58, width: w + 4, height: 14, rx: 7 }, b.svg);
-    b.rollers = [];
     for (var rx = 18; rx < w; rx += 46) {
       var g = el('g', { transform: 'translate(' + rx + ' 65)' }, b.svg);
       el('circle', { 'class': 'roller', r: 5.5 }, g);
-      b.rollers.push(el('line', { 'class': 'spoke', x1: -5, y1: 0, x2: 5, y2: 0 }, g));
+      el('line', { 'class': 'spoke', x1: -5, y1: 0, x2: 5, y2: 0 }, g);
     }
-    b.cartons = [];
     var n = Math.ceil(w / 210) + 1;
     for (var i = 0; i < n; i++) {
       var c = el('g', {}, b.svg);
@@ -600,49 +516,11 @@
       el('rect', { 'class': 'ctn-tag', x: 6, y: 58 - h + 8, width: 34, height: 14, rx: 2 }, c);
       var t = el('text', { 'class': 'ctn-label', x: 9, y: 58 - h + 18.5 }, c);
       t.textContent = TAGS[i % TAGS.length];
-      b.cartons.push(c);
+      c.setAttribute('transform', 'translate(' + (i * 210 - 60) + ' 0)');
     }
   }
 
-  function update() {
-    var y = window.scrollY, max = document.documentElement.scrollHeight - window.innerHeight;
-    if (bar) bar.style.transform = 'scaleX(' + (max > 0 ? y / max : 0).toFixed(4) + ')';
-    if (pin && shift) {
-      var r = pin.getBoundingClientRect();
-      var p = Math.min(1, Math.max(0, -r.top / shift));
-      track.style.transform = 'translate3d(' + (-p * shift).toFixed(1) + 'px,0,0)';
-      if (pinBar) pinBar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
-      if (pinCart) pinCart.style.left = (p * 100).toFixed(2) + '%';
-      // Tilt, lift and fade each card by its distance from the middle of the screen
-      var mid = window.innerWidth / 2, best = null, bestD = 9;
-      pinCards.forEach(function (c) {
-        var cr = c.getBoundingClientRect();
-        var d = Math.max(-1.6, Math.min(1.6, (cr.left + cr.width / 2 - mid) / mid));
-        var a = Math.abs(d);
-        c.style.transform = 'rotateY(' + (-d * 16).toFixed(2) + 'deg) translateY(' + (a * 28).toFixed(1) + 'px) scale(' + (1 - a * 0.07).toFixed(3) + ')';
-        c.style.opacity = (1 - Math.min(0.6, a * 0.42)).toFixed(3);
-        if (a < bestD) { bestD = a; best = c; }
-      });
-      pinCards.forEach(function (c) { c.classList.toggle('is-focus', c === best); });
-    }
-    belts.forEach(function (b) {
-      var top = b.host.getBoundingClientRect().top;
-      if (top > window.innerHeight || top < -100) return;
-      var run = (window.innerHeight - top) * 0.9, gap = 210, span = b.cartons.length * gap;
-      b.cartons.forEach(function (c, i) {
-        var x = ((run + i * gap) % span + span) % span - gap;
-        c.setAttribute('transform', 'translate(' + x.toFixed(1) + ' 0)');
-      });
-      var deg = (run / 5.5) * 57.3;
-      b.rollers.forEach(function (s) { s.setAttribute('transform', 'rotate(' + deg.toFixed(1) + ')'); });
-    });
-  }
-  var queued = false;
-  function onScroll() { if (!queued) { queued = true; requestAnimationFrame(function () { queued = false; update(); }); } }
-  function onResize() { layoutPin(); belts.forEach(buildBelt); update(); }
+  function onResize() { belts.forEach(buildBelt); }
   onResize();
-  window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize);
-  // Fonts change card widths once they load
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(onResize);
 })();

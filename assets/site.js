@@ -1,4 +1,4 @@
-// SuXin site behaviour: theme, menus, product tabs, scroll reveal, counters.
+// SuXin site behaviour: theme, language, menus, product tabs, screen carousels.
 (function () {
   'use strict';
 
@@ -10,7 +10,6 @@
   };
 
   var root = document.documentElement;
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   document.querySelectorAll('[data-link]').forEach(function (a) {
     var url = LINKS[a.getAttribute('data-link')];
@@ -161,39 +160,4 @@
       if (e.key === 'ArrowLeft') go(cur - 1);
     });
   });
-
-  // Count-up numbers
-  function countUp(el) {
-    var target = parseFloat(el.getAttribute('data-count'));
-    var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
-    var fmt = function (n) { return n.toLocaleString('en-MY', { minimumFractionDigits: dec, maximumFractionDigits: dec }); };
-    if (reduceMotion) { el.textContent = fmt(target); return; }
-    var start = null, dur = 1400;
-    function step(ts) {
-      if (start === null) start = ts;
-      var p = Math.min((ts - start) / dur, 1);
-      el.textContent = fmt(target * (1 - Math.pow(1 - p, 3)));
-      if (p < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  // Reveal on scroll
-  var reveal = document.querySelectorAll('.rv');
-  var counters = document.querySelectorAll('[data-count]');
-  if (!('IntersectionObserver' in window)) {
-    reveal.forEach(function (el) { el.setAttribute('data-in', ''); });
-    counters.forEach(countUp);
-    return;
-  }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      if (!en.isIntersecting) return;
-      var el = en.target;
-      if (el.hasAttribute('data-count')) countUp(el); else el.setAttribute('data-in', '');
-      io.unobserve(el);
-    });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-  reveal.forEach(function (el) { io.observe(el); });
-  counters.forEach(function (el) { io.observe(el); });
 })();

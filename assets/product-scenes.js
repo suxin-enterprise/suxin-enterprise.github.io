@@ -1,5 +1,5 @@
-// Product pages: each product has its own scroll-driven scene (SVG drawn here).
-// The section is pinned; scroll progress P (0..1) runs the scene and picks the copy panel.
+// Product pages: each product has its own scene (SVG drawn here), shown as a still picture.
+// Each scene is a timeline P (0..1); the page poses it once at POSE and never moves it.
 (function () {
   'use strict';
 
@@ -7,7 +7,6 @@
   if (!root) return;
 
   var NS = 'http://www.w3.org/2000/svg';
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function el(tag, attrs, parent) {
     var n = document.createElementNS(NS, tag);
     for (var k in attrs) n.setAttribute(k, attrs[k]);
@@ -551,53 +550,12 @@
   // ---------- driver ----------
   var build = SCENES[root.getAttribute('data-scene')];
   if (!build) return;
-  var panels = Array.prototype.slice.call(root.querySelectorAll('.pstory-panel'));
-  var segs = Array.prototype.slice.call(root.querySelectorAll('.pstory-segs button'));
-  var fills = segs.map(function (b) { return b.querySelector('i'); });
-  var N = panels.length;
+  var N = Number(root.getAttribute('data-steps')) || 5;
+  // Where on each scene's timeline to freeze it: the point that shows the most at once
+  var POSE = { pos: 0.3, 'barcode-scan': 0.3, wms: 0.3, 'every-data': 0.3, books: 0.3 };
+  var now = POSE[root.getAttribute('data-scene')];
   var svg = el('svg', { 'class': 'ps-svg', viewBox: '0 0 600 480', 'aria-hidden': 'true', focusable: 'false' });
   root.querySelector('.pstory-scene').appendChild(svg);
-  var render = build(svg);
-
-  var target = 0, now = 0, active = -1, clock = 0, last = 0, running = false, visible = true;
-  function travel() { return Math.max(1, root.offsetHeight - window.innerHeight); }
-  function readScroll() {
-    target = clamp(-root.getBoundingClientRect().top / travel(), 0, 1);
-  }
   function at(step, a, b) { return seg(now * N - step, a, b); }
-  function paint() {
-    var f = now * N, step = Math.min(N - 1, Math.floor(f));
-    if (step !== active) {
-      active = step;
-      panels.forEach(function (p, k) { p.classList.toggle('is-on', k === step); p.classList.toggle('is-past', k < step); });
-      segs.forEach(function (b, k) { if (k === step) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
-    }
-    fills.forEach(function (i, k) { i.style.transform = 'scaleX(' + clamp(f - k, 0, 1).toFixed(3) + ')'; });
-    render(now, at, clock);
-  }
-  function tick(ts) {
-    running = false;
-    var real = last ? Math.min(0.5, (ts - last) / 1000) : 0, dt = Math.min(0.05, real);
-    last = ts;
-    if (!reduceMotion) clock += dt;
-    now += (target - now) * (reduceMotion ? 1 : 1 - Math.pow(0.002, real));
-    if (Math.abs(target - now) < 0.0004) now = target;
-    paint();
-    if (visible && (!reduceMotion || now !== target)) request();
-  }
-  function request() { if (!running) { running = true; requestAnimationFrame(tick); } }
-
-  segs.forEach(function (b, k) {
-    b.addEventListener('click', function () {
-      var top = root.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top: top + (k + 0.15) / N * travel(), behavior: reduceMotion ? 'auto' : 'smooth' });
-    });
-  });
-  readScroll(); now = target; paint();
-  window.addEventListener('scroll', function () { readScroll(); request(); }, { passive: true });
-  window.addEventListener('resize', function () { readScroll(); request(); });
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) { last = 0; request(); } }).observe(root);
-  }
-  request();
+  build(svg)(now, at, 0);
 })();

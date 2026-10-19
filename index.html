@@ -19,9 +19,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"/>
 <link rel="stylesheet" href="assets/site.css?v=a7d32435"/>
-<link rel="stylesheet" href="assets/suxin.css?v=b6dadbbd"/>
-<link rel="stylesheet" href="assets/home-scroll.css?v=d4cd99e8"/>
-<link rel="stylesheet" href="assets/warehouse.css?v=e04f817f"/>
+<link rel="stylesheet" href="assets/suxin.css?v=ca04127d"/>
+<link rel="stylesheet" href="assets/home-scroll.css?v=868a0a51"/>
+<link rel="stylesheet" href="assets/warehouse.css?v=7db0f1a3"/>
 <script>
   // Apply the saved colour theme before first paint to avoid a flash.
   try { var t = localStorage.getItem('suxin-theme'); if (t === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}
@@ -30,7 +30,6 @@
 </head>
 <body>
 <div class="site">
-<div class="scroll-prog" aria-hidden="true"></div>
 <a href="#main" class="skip">Skip to content</a>
 
 <header class="nav">
@@ -51,7 +50,6 @@
         </div>
       </div>
       <a href="#screens">Screens</a>
-      <a href="#flow">How it works</a>
       <a href="#built-for">Who it's for</a>
       <a href="#start">Get started</a>
     </nav>
@@ -80,7 +78,6 @@
     <a class="sub" href="products/books/">SuXin Books — Accounts</a>
     <span class="dlabel">Explore</span>
     <a href="#screens">Screens</a>
-    <a href="#flow">How it works</a>
     <a href="#built-for">Who it's for</a>
     <a href="#start">Get started</a>
   </nav>
@@ -92,15 +89,12 @@
 <main id="main">
 <div class="page-in" id="top">
 
-<!-- STORY: the animated warehouse stays pinned while the steps scroll over it -->
+<!-- HERO: static warehouse picture behind the intro -->
 <section class="story" aria-label="How SuXin works, from the dock to the books">
   <div class="story-stage">
     <span class="glow ora" style="width:520px;height:520px;top:-180px;left:-120px"></span>
     <span class="glow red" style="width:420px;height:420px;bottom:-200px;right:-80px"></span>
     <div class="story-scene"></div>
-    <nav class="story-rail" aria-label="Story steps">
-      <a href="#top" aria-label="Start">0</a><a href="#flow" aria-label="Receive">1</a><a href="#step-2" aria-label="Store">2</a><a href="#step-3" aria-label="Count">3</a><a href="#step-4" aria-label="Sell">4</a><a href="#step-5" aria-label="See">5</a><a href="#step-6" aria-label="Book">6</a>
-    </nav>
   </div>
   <div class="story-steps">
   <div class="story-step" data-cam="18,13,1" data-cam-m="17,13,1" data-ring="0">
@@ -115,80 +109,7 @@
           <a class="btn btn-ghost btn-lg" href="#products">Explore products</a>
         </div>
         <p class="hero-note">Five apps · one account · web and Android · Chinese, English, Malay · Malaysia &amp; Singapore</p>
-        <div class="scroll-hint" aria-hidden="true"><span class="mouse"></span><span>Scroll to walk the warehouse</span></div>
       </div>
-    </div>
-  </div>
-  <div class="story-step" id="flow" data-cam="10,21,1.9" data-ring="3.2">
-    <div class="wrap">
-      <article class="story-card">
-        <span class="story-num" aria-hidden="true">01</span>
-        <span class="badge">SuXin WMS · Receiving</span>
-        <h2 class="h3">Stock arrives. Every carton counted in.</h2>
-        <p>The lorry backs into the dock, the purchase order is ticked off line by line, and the landed cost is worked out as the cartons roll down the belt.</p>
-        <div class="story-meta"><i></i><span>PO-261003-0915-MJ · 24 / 24</span></div>
-        <a class="link-arrow" href="products/wms/">SuXin WMS <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-      </article>
-    </div>
-  </div>
-  <div class="story-step" id="step-2" data-cam="15,6,1.65" data-ring="4">
-    <div class="wrap">
-      <article class="story-card">
-        <span class="story-num" aria-hidden="true">02</span>
-        <span class="badge">SuXin WMS · Stock</span>
-        <h2 class="h3">Every shelf, every branch, one stock count.</h2>
-        <p>Put away by shelf and warehouse. Transfers move stock from the central warehouse to the shops, and every move is recorded on both sides.</p>
-        <div class="story-meta"><i></i><span>Central Warehouse → Ipoh Shop</span></div>
-        <a class="link-arrow" href="products/wms/">SuXin WMS <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-      </article>
-    </div>
-  </div>
-  <div class="story-step" id="step-3" data-cam="9.2,7,2.3" data-ring="2.6">
-    <div class="wrap">
-      <article class="story-card">
-        <span class="story-num" aria-hidden="true">03</span>
-        <span class="badge">SuXin Barcode Scan · Stock-take</span>
-        <h2 class="h3">Scan the shelf. The count fixes itself.</h2>
-        <p>Walk the aisle with a phone camera or a barcode scanner. Differences go straight into SuXin WMS, so the number on screen matches the shelf.</p>
-        <div class="story-meta"><i></i><span>2909000000028 · Rice 5kg · 20 → 19</span></div>
-        <a class="link-arrow" href="products/barcode-scan/">SuXin Barcode Scan <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-      </article>
-    </div>
-  </div>
-  <div class="story-step" id="step-4" data-cam="30,21.5,2.1" data-ring="3.2">
-    <div class="wrap">
-      <article class="story-card">
-        <span class="story-num" aria-hidden="true">04</span>
-        <span class="badge">SuXin POS · Counter</span>
-        <h2 class="h3">Sold at the counter. Stock drops at once.</h2>
-        <p>Scan, scan, charge. SST goes on the bill, the receipt prints, and the item leaves that branch's stock the moment it's paid, even offline.</p>
-        <div class="story-meta"><i></i><span>RM 47.43 · 261010-025937-DX</span></div>
-        <a class="link-arrow" href="products/pos/">SuXin POS <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-      </article>
-    </div>
-  </div>
-  <div class="story-step" id="step-5" data-cam="28.2,12.4,2.4" data-ring="2.6">
-    <div class="wrap">
-      <article class="story-card">
-        <span class="story-num" aria-hidden="true">05</span>
-        <span class="badge">SuXin Every Data · Owner's view</span>
-        <h2 class="h3">The owner sees it, from anywhere.</h2>
-        <p>Today's sales, receipts, low stock and purchase orders waiting, live on Every Data. Check it from your phone between suppliers.</p>
-        <div class="story-meta"><i></i><span>RM 1,273.16 · ▲ 35</span></div>
-        <a class="link-arrow" href="products/every-data/">SuXin Every Data <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-      </article>
-    </div>
-  </div>
-  <div class="story-step" id="step-6" data-cam="19,12.8,2.5" data-ring="2.2">
-    <div class="wrap">
-      <article class="story-card">
-        <span class="story-num" aria-hidden="true">06</span>
-        <span class="badge">SuXin Books · Accounts</span>
-        <h2 class="h3">Booked, e-invoiced, done.</h2>
-        <p>Sales post to the accounts by themselves. The MyInvois file is ready, and P&amp;L and SST stay up to date for you or your accountant.</p>
-        <div class="story-meta"><i></i><span>INV-2026-00001 · MyInvois JSON</span></div>
-        <a class="link-arrow" href="products/books/">SuXin Books <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-      </article>
     </div>
   </div>
   </div>
@@ -285,7 +206,6 @@
         <div class="pcard-foot"><span class="mono dim">One account for all</span><span class="link-arrow">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
       </a>
     </div>
-    <div class="hpin-bar" aria-hidden="true"><i></i><b class="hpin-cart"></b></div>
   </div>
   </div>
 </section>
@@ -491,7 +411,6 @@
   <div class="wrap">
     <div class="sec-head rv"><span class="eyebrow">Getting started</span>
       <h2 class="h2">From sign-up to first sale, the same day</h2></div>
-    <div class="gs-track" aria-hidden="true"><i></i><b class="gs-cart"></b><span style="left:0"></span><span style="left:50%"></span><span style="left:100%"></span></div>
     <div class="grid g3 gs-steps">
       <div class="card rv"><span class="case-num">Step 01</span><h3 class="h3 mt-[0.6rem] mb-2">Register your company</h3><p class="muted text-(length:--fs-sm)">Create an account on the trial, or join your company's existing one. Add your branches and staff.</p></div>
       <div class="card rv d1"><span class="case-num">Step 02</span><h3 class="h3 mt-[0.6rem] mb-2">Bring in your items</h3><p class="muted text-(length:--fs-sm)">Scan barcodes with SuXin Barcode Scan, set prices and categories, enter opening stock per branch.</p></div>
@@ -551,7 +470,6 @@
       <div><h4>Explore</h4>
         <ul>
           <li><a href="#screens">Screens</a></li>
-          <li><a href="#flow">How it works</a></li>
           <li><a href="#start">Get started</a></li>
         </ul>
       </div>
@@ -561,8 +479,8 @@
 </footer>
 </div>
 <script src="assets/i18n.js?v=4875a974" defer></script>
-<script src="assets/site.js?v=f52f647a" defer></script>
-<script src="assets/home-scroll.js?v=b5c17280" defer></script>
-<script src="assets/warehouse.js?v=9ced18fd" defer></script>
+<script src="assets/site.js?v=95e946aa" defer></script>
+<script src="assets/home-scroll.js?v=10acf380" defer></script>
+<script src="assets/warehouse.js?v=5d2173c6" defer></script>
 </body>
 </html>

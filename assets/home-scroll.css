@@ -1,94 +1,30 @@
-/* Homepage scroll animations for: one account, screens, who it's for, getting started. */
+/* Homepage: one account diagram and "who it's for" icons. Everything here is static. */
 
-/* Pinned sections (wide, tall screens only; set by home-scroll.js) */
-.site .is-pinned { padding-block: 0; }
-.site .is-pinned > .pin-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-top: 66px; overflow: hidden; }
-
-/* ---------- One account: apps wire up to the one item record ---------- */
+/* ---------- One account: apps wired to the one item record ---------- */
 .site .oa-stage { position: relative; padding: 3.4rem 2.6rem; }
 .site .oa-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
 .site .oa-lines .ln { fill: none; stroke: var(--line-strong); stroke-width: 1.6; stroke-dasharray: 4 6; }
 .site .oa-lines .ln.on { stroke: #10b981; stroke-dasharray: none; }
-.site .oa-lines .pulse { fill: #5eead4; }
-.site .oa-node { position: absolute; z-index: 2; width: 60px; height: 60px; display: grid; place-items: center; border-radius: 17px; background: var(--grad); color: #fff; font: 600 .64rem/1 var(--f-mono); letter-spacing: .04em; box-shadow: 0 14px 28px -14px #10b981e6; transition: box-shadow .35s var(--ease); will-change: transform; }
-.site .oa-node.hit { box-shadow: 0 0 0 7px #5eead440, 0 14px 30px -12px #10b981; }
+.site .oa-node { position: absolute; z-index: 2; width: 60px; height: 60px; display: grid; place-items: center; border-radius: 17px; background: var(--grad); color: #fff; font: 600 .64rem/1 var(--f-mono); letter-spacing: .04em; box-shadow: 0 14px 28px -14px #10b981e6; }
 .site .oa-node[data-app=pos]   { left: 0; top: 0; }
 .site .oa-node[data-app=scan]  { right: 0; top: 0; }
 .site .oa-node[data-app=wms]   { right: -14px; top: calc(50% - 30px); }
 .site .oa-node[data-app=data]  { right: 0; bottom: 0; }
 .site .oa-node[data-app=books] { left: 0; bottom: 0; }
 .site .oa-card { position: relative; z-index: 1; background: var(--surface-solid); }
-.site .oa-price, .site .oa-qty { display: inline-block; transition: color .3s; }
-.site .oa-price.flash, .site .oa-qty.flash { color: var(--gold); animation: hs-flip .5s var(--ease-pop); font-weight: 700; }
-.site .oa-low.flash { animation: hs-ping 1.2s var(--ease) infinite; }
-@keyframes hs-flip { 0% { transform: translateY(-8px); opacity: 0; } 100% { transform: none; opacity: 1; } }
-@keyframes hs-ping { 50% { box-shadow: 0 0 0 6px #f59e0b33; } }
+.site .oa-price, .site .oa-qty { display: inline-block; }
 
-/* ---------- Screens: scroll flips the tabs ---------- */
-.site .tab { position: relative; overflow: hidden; }
-.site .tab-fill { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: #fff; opacity: .7; transform-origin: 0 50%; transform: scaleX(0); pointer-events: none; }
-.site .scr-pin:not(.is-pinned) .tab-fill { display: none; }
-.site .scr-pin.is-pinned .sec-head { max-width: none; margin-bottom: 1.25rem; }
-.site .scr-pin.is-pinned .sec-head .lead, .site .scr-pin.is-pinned .hero-note { display: none; }
-.site .scr-pin.is-pinned .mt-5 { margin-top: 1rem; }
-.site .tabpanel.is-enter .preview-frame > .stack { animation: hs-in-left .6s var(--ease-pop) both; }
-.site .tabpanel.is-enter .mock { animation: hs-in-right .75s var(--ease-pop) both; }
-.site .tabpanel.is-enter .kpi { animation: hs-up .5s var(--ease-pop) both; }
-.site .tabpanel.is-enter .kpi:nth-child(2) { animation-delay: .08s; }
-.site .tabpanel.is-enter .kpi:nth-child(3) { animation-delay: .16s; }
-.site .tabpanel.is-enter .tbl tbody tr { animation: hs-up .45s var(--ease-pop) both; }
-.site .tabpanel.is-enter .tbl tbody tr:nth-child(1) { animation-delay: .18s; }
-.site .tabpanel.is-enter .tbl tbody tr:nth-child(2) { animation-delay: .25s; }
-.site .tabpanel.is-enter .tbl tbody tr:nth-child(3) { animation-delay: .32s; }
-.site .tabpanel.is-enter .tbl tbody tr:nth-child(4) { animation-delay: .39s; }
-@keyframes hs-in-left { from { opacity: 0; transform: translateX(-40px); } }
-@keyframes hs-in-right { from { opacity: 0; transform: translateX(60px) rotate(2deg) scale(.96); } }
-@keyframes hs-up { from { opacity: 0; transform: translateY(14px); } }
-
-/* ---------- Who it's for: the deck fans out, each card has a little animation ---------- */
-.site .fan > .card { will-change: transform; transform-origin: 50% 100%; background: var(--surface-solid); }
+/* ---------- Who it's for: cards with a small icon ---------- */
+.site .fan > .card { background: var(--surface-solid); }
 .site .bf-ico { display: block; width: 46px; height: 46px; margin-bottom: .85rem; overflow: visible; }
 .site .bf-ico .stroke { fill: none; stroke: var(--amber); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 .site .bf-ico .fill { fill: #10b981; }
 .site .bf-ico .fill2 { fill: #0d9488; }
-.site .bf-ico * { transform-box: fill-box; transform-origin: center; }
-.site .ico-cup .steam { fill: none; stroke: var(--gold); stroke-width: 2.2; stroke-linecap: round; animation: hs-steam 2.4s ease-in-out infinite; }
-.site .ico-cup .s2 { animation-delay: .4s; } .site .ico-cup .s3 { animation-delay: .8s; }
-@keyframes hs-steam { 0% { opacity: 0; transform: translateY(5px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(-6px); } }
-.site .ico-cart .cart { animation: hs-roll 2.6s ease-in-out infinite alternate; transform-box: view-box; }
+.site .ico-cup .steam { fill: none; stroke: var(--gold); stroke-width: 2.2; stroke-linecap: round; }
 .site .ico-cart .box { fill: #e2bb84; }
-.site .ico-cart .b2 { animation: hs-hop 1.3s ease-in-out infinite; }
 .site .ico-cart .wheel circle { fill: var(--bg-2); stroke: var(--amber); stroke-width: 2.2; }
 .site .ico-cart .wheel path { stroke: var(--amber); stroke-width: 1.8; }
-.site .ico-cart .wheel { animation: hs-spin 1s linear infinite; }
-.site .ico-cart .ground, .site .ico-truck .road { stroke: var(--line-strong); stroke-width: 2; stroke-dasharray: 6 5; animation: hs-road .6s linear infinite; }
-@keyframes hs-roll { from { transform: translateX(-3px); } to { transform: translateX(3px); } }
-@keyframes hs-hop { 50% { transform: translateY(-2px); } }
-@keyframes hs-spin { to { transform: rotate(360deg); } }
-@keyframes hs-road { to { stroke-dashoffset: -11; } }
-.site .ico-tag .tag { transform-box: view-box; transform-origin: 24px 4px; animation: hs-swing 2.2s ease-in-out infinite; }
+.site .ico-cart .ground, .site .ico-truck .road { stroke: var(--line-strong); stroke-width: 2; stroke-dasharray: 6 5; }
 .site .ico-tag .hole { fill: var(--bg-2); }
 .site .ico-tag .bars { stroke: #fff; stroke-width: 1.6; opacity: .85; }
-@keyframes hs-swing { 0%, 100% { transform: rotate(-9deg); } 50% { transform: rotate(9deg); } }
-.site .ico-truck .truck { animation: hs-bump .45s ease-in-out infinite; transform-box: view-box; }
 .site .ico-truck .tyre { fill: var(--bg-2); stroke: var(--amber); stroke-width: 2.4; }
-@keyframes hs-bump { 50% { transform: translateY(-1.2px); } }
-
-/* ---------- Getting started: a cart rides the track and lights each step ---------- */
-.site .gs-track { position: relative; height: 4px; border-radius: 4px; background: var(--surface-2); margin: 0 calc(100% / 6) 2.4rem; }
-.site .gs-track i { position: absolute; inset: 0; border-radius: 4px; background: var(--grad); transform-origin: 0 50%; transform: scaleX(0); }
-.site .gs-track span { position: absolute; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: var(--bg); border: 2px solid var(--line-strong); transition: background .3s, border-color .3s, transform .4s var(--ease-pop); }
-.site .gs-track span.on { background: #10b981; border-color: #10b981; transform: scale(1.25); box-shadow: 0 0 0 6px #10b98126; }
-.site .gs-cart { position: absolute; bottom: 4px; left: 0; width: 34px; height: 30px; margin-left: -17px; }
-.site .gs-cart::before { content: ""; position: absolute; left: 3px; right: 3px; bottom: 0; height: 9px; border-radius: 3px; background: linear-gradient(180deg, #34d399, #0d9488); }
-.site .gs-cart::after { content: ""; position: absolute; left: 8px; width: 18px; bottom: 9px; height: 15px; border-radius: 2px; background: linear-gradient(90deg, #e2bb84 0 46%, #9a6a34 46% 54%, #e2bb84 54%); box-shadow: inset -4px 0 0 #c1925a; animation: hs-hop .5s ease-in-out infinite; }
-.site .gs-steps .card { transition: border-color .4s, background .4s, transform .5s var(--ease-pop), box-shadow .4s; }
-.site .gs-steps .card.is-lit { border-color: color-mix(in srgb, var(--orange) 50%, transparent); background: var(--grad-soft); transform: translateY(-6px); box-shadow: 0 24px 50px -30px #10b981b3; }
-.site .gs-steps .card::after { content: "✓"; position: absolute; top: 1rem; right: 1rem; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--grad); color: #fff; font-weight: 700; font-size: .85rem; transform: scale(0); transition: transform .45s var(--ease-pop); }
-.site .gs-steps .card.is-lit::after { transform: scale(1); }
-.site .gs-steps .card.is-lit .case-num { color: var(--amber); }
-@media (width <= 860px) { .site .gs-track { display: none; } }
-
-@media (prefers-reduced-motion: reduce) {
-  .site .bf-ico *, .site .gs-cart::after { animation: none !important; }
-}
